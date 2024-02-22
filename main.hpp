@@ -17,14 +17,24 @@ void printStudent(Student *head);
 
 void makeStudent(Student *student)
 {
-    /*******************************
-     * Code your program here
-     *******************************/
+    ifstream file("students.txt");
+    if (!file.is_open()) {
+        cerr << "Error opening file." << endl;
+        return;
+    }
+
+    while (!file.eof()) {
+        file >> student->id >> student->name >> student->major;
+        student++;
+    }
+
+    file.close();
 }
+
 void printStudent(Student *student)
 {
-    cout << endl;
-    /*******************************
-     * Code your program here
-     *******************************/
+    while (student->id != 0) {
+        cout << "ID: " << student->id << ", Name: " << student->name << ", Major: " << student->major << endl;
+        student++;
+    }
 }
